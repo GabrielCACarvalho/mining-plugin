@@ -1,0 +1,5 @@
+name: Mining
+version: '${project.version}'
+main: test.dungeonrealms.mining.Mining
+api-version: 1.18
+description: A mining plugin for a minecraft server.
