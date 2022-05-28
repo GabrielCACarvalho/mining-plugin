@@ -3,3 +3,10 @@ version: '${project.version}'
 main: test.dungeonrealms.mining.Mining
 api-version: 1.18
 description: A mining plugin for a minecraft server.
+commands:
+  pick:
+    description: Get a pick!
+    usage: /<command>
+  coalore:
+    description: Get some coal ores!
+    usage: /<command>
