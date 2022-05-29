@@ -20,11 +20,13 @@ public class PickCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         var pick = new Pick();
 
-        var enchs = List.of(new PickEnchant(Enchant.MINING_SUCCESS, 5));
+        var enchs = List.of(new PickEnchant(Enchant.MINING_SUCCESS, 5, true));
 
-        pick.setName("Tier 1");
+        pick.setName("Novice Pickaxe");
         pick.setTier(1);
+        pick.setLevel(1);
         pick.setXp(0);
+        pick.setNeededXp(10);
         pick.setPickEnchs(enchs);
 
         if (commandSender instanceof Player player) {
@@ -33,12 +35,23 @@ public class PickCommand implements CommandExecutor {
             var itemMeta = woodenPick.getItemMeta();
 
             if (itemMeta != null) {
-                itemMeta.setDisplayName(ChatColor.GRAY.toString() + ChatColor.BOLD + pick.getName());
+                itemMeta.setDisplayName(ChatColor.WHITE + pick.getName());
                 var lore = new ArrayList<String>();
 
-                pick.getPickEnchs().forEach(ench -> lore.add(ench.getEnchant().getName() + " " + ench.getPercentage() + "%"));
-
-                lore.add(ChatColor.GRAY + "EXP: " + pick.getXp());
+                lore.add(ChatColor.GRAY + "Level: " + ChatColor.WHITE + pick.getLevel());
+                lore.add(ChatColor.GRAY + "XP: " + pick.getXp() + " / " + pick.getNeededXp());
+                lore.add(
+                        ChatColor.GRAY
+                                + ChatColor.BOLD.toString()
+                                + "Passive: "
+                                + ChatColor.RED
+                                + pick.getPickEnchs().get(0).getEnchant().getName()
+                                + ": "
+                                + "+"
+                                + pick.getPickEnchs().get(0).getPercentage()
+                                + "%"
+                );
+                lore.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "A pickaxe made of sturdy wood.");
 
                 itemMeta.setLore(lore);
             }

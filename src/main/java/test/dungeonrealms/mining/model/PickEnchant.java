@@ -6,10 +6,20 @@ public class PickEnchant {
 
     private Enchant enchant;
     private Integer percentage;
+    private Boolean passive;
 
-    public PickEnchant(Enchant enchant, Integer percentage) {
+    public PickEnchant(Enchant enchant, Integer percentage, Boolean passive) {
         this.enchant = enchant;
         this.percentage = percentage;
+        this.passive = passive;
+    }
+
+    public Boolean getPassive() {
+        return passive;
+    }
+
+    public void setPassive(Boolean passive) {
+        this.passive = passive;
     }
 
     public Enchant getEnchant() {

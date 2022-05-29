@@ -6,8 +6,26 @@ public class Pick {
     
     private String name;
     private Integer tier;
+    private Integer level;
     private List<PickEnchant> pickEnchs;
     private Integer xp;
+    private Integer neededXp;
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getNeededXp() {
+        return neededXp;
+    }
+
+    public void setNeededXp(Integer neededXp) {
+        this.neededXp = neededXp;
+    }
 
     public String getName() {
         return name;
