@@ -13,6 +13,7 @@ import test.dungeonrealms.mining.model.PickEnchant;
 import test.dungeonrealms.mining.model.enums.Enchant;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -67,9 +68,9 @@ public class BlockBreakListener implements Listener {
         meta.setLore(setNewLore(event));
         item.setItemMeta(meta);
 
-        var levelUpItem = levelUpPick(item);
+        item = levelUpPick(item);
 
-        item = upgradePick(levelUpItem);
+        item = upgradePick(item);
 
         event.getPlayer().getInventory().setItemInMainHand(item);
     }
@@ -247,15 +248,17 @@ public class BlockBreakListener implements Listener {
     }
 
     private Integer getNeededXp(Integer level) {
-        Integer expConst = 10;
-        return level * expConst;
+        Integer EXP_CONSTANT = 10;
+        return level * EXP_CONSTANT;
     }
 
     private List<PickEnchant> getPickEnchs(List<String> lore) {
         var enchs = lore.stream().filter(line -> (line.contains("%") && !line.contains("Passive"))).toList();
 
+        List<PickEnchant> pickEnchants = new ArrayList<>();
+
         if (!enchs.isEmpty()) {
-            return enchs.stream().map(ench -> {
+            pickEnchants = enchs.stream().map(ench -> {
 
                 Bukkit.getLogger().info(ench);
 
@@ -276,7 +279,9 @@ public class BlockBreakListener implements Listener {
             }).toList();
         }
 
-        return Collections.emptyList();
+        pickEnchants.add(new PickEnchant(Enchant.MINING_SUCCESS, 5, true));
+
+        return pickEnchants;
     }
 
     private boolean validPick(ItemStack item) {
